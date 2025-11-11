@@ -1,4 +1,7 @@
 package tn.esprit.tpcafe_eyahamami.repositories;
 
-public interface DetailCommandeRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import tn.esprit.tpcafe_eyahamami.entities.DetailCommande;
+
+public interface DetailCommandeRepository extends JpaRepository<DetailCommande, Long> {
 }

@@ -1,18 +1,34 @@
-package entities;
+package tn.esprit.tpcafe_eyahamami.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
+import java.util.List;
+
 @Entity
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@EqualsAndHashCode
+
 
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idClient;
-    private String nom;
-    private String prenom;
-    private LocalDate dateNaissance;
+    long idClient;
+    String nom;
+     String prenom;
+     LocalDate dateNaissance;
+     @OneToOne
+     Adresse adresse;
+     @OneToOne(mappedBy = "client")
+    CarteFidelite carteFidelite;
+     @OneToMany(mappedBy = "client")
+    List<Commande> commandes;
 }

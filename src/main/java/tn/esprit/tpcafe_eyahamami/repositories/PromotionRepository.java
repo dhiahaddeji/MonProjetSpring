@@ -1,4 +1,7 @@
 package tn.esprit.tpcafe_eyahamami.repositories;
 
-public interface PromotionRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import tn.esprit.tpcafe_eyahamami.entities.Promotion;
+
+public interface PromotionRepository extends JpaRepository<Promotion, Long> {
 }
