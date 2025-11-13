@@ -1,4 +1,4 @@
-package tn.esprit.TPCafe_dhia_haddeji.entities.;
+package tn.esprit.TPCafe_dhia_haddeji.resController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

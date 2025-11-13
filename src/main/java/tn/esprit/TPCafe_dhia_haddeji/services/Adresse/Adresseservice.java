@@ -1,11 +1,14 @@
+package tn.esprit.TPCafe_dhia_haddeji.services.Adresse;
+
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import tn.esprit.tpcafe_eyahamami.dto.Adresse.AdresseReponse;
-import tn.esprit.tpcafe_eyahamami.dto.Adresse.AdresseRequest;
-import tn.esprit.tpcafe_eyahamami.entities.Adresse;
-import tn.esprit.tpcafe_eyahamami.mapper.AdresseMapper;
-import tn.esprit.tpcafe_eyahamami.repositories.AdresseRepository;
+import tn.esprit.TPCafe_dhia_haddeji.dto.Adresse.AdresseReponse;
+import tn.esprit.TPCafe_dhia_haddeji.dto.Adresse.AdresseRequest;
+import tn.esprit.TPCafe_dhia_haddeji.entities.Adresse;
+import tn.esprit.TPCafe_dhia_haddeji.mapper.AdresseMapper;
+import tn.esprit.TPCafe_dhia_haddeji.repositories.AdresseRepository;
+
 
 import java.util.List;
 @Service

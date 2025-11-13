@@ -13,10 +13,10 @@
     </parent>
 
     <groupId>tn.esprit</groupId>
-    <artifactId>TpCafe_EyaHamami</artifactId>
+    <artifactId>TPCafe_dhia_haddeji</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>TpCafe_EyaHamami</name>
-    <description>Spring Boot project TpCafe_EyaHamami</description>
+    <name>TPCafe_dhia_haddeji</name>
+    <description>Spring Boot project TPCafe_dhia_haddeji</description>
 
     <properties>
         <java.version>17</java.version>
