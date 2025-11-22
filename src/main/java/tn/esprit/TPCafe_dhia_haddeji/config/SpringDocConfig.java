@@ -30,7 +30,7 @@ public class SpringDocConfig {
                 ---
 
                 ### 👩‍💻 À propos
-                Développé par **Eya Hamami** dans le cadre du module *Architecture des Systèmes d’Information (ASI II)*.  
+                Développé par **Dhia Haddeji** dans le cadre du module *Architecture des Systèmes d’Information (ASI II)*.  
                 Pour plus d’informations ou pour me contacter :
 
                  
@@ -39,12 +39,12 @@ public class SpringDocConfig {
 
         return new OpenAPI()
                 .info(new Info()
-                        .title("☕ TP Café - Eya Hamami")
+                        .title("☕ TP Café -Dhia Haddeji")
                         .description(mdDescription)
                         .version("1.0")
                         .contact(new Contact()
                                 .name("Equipe ASI II")
-                                .email("📧 **Email** : [Eya.Hamami@esprit.tn](mailto:Eya.Hamami@esprit.tn)" )
+                                .email("📧 **Email** : [Dhia.Haddeji@esprit.tn](mailto:Dhia.Haddeji@esprit.tn)" )
                                 .url("🔗 **LinkedIn** : [Profil professionnel](https://www.linkedin.com/in/**********/)"))
                 );
     }

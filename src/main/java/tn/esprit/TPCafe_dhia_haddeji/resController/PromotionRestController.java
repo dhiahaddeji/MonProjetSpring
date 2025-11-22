@@ -78,4 +78,15 @@ public class PromotionRestController {
     public boolean exist(@PathVariable long id) {
         return promotionService.verifyPromotionById(id);
     }
+
+    @PutMapping("/{idPromo}/article/{idArticle}")
+    public void affecterPromotionAArticle(@PathVariable long idArticle, @PathVariable long idPromo) {
+        promotionService.affecterPromotionAArticle(idArticle, idPromo);
+    }
+
+
+    @PutMapping("/{idPromo}/remove-article/{idArticle}")
+    public void desaffecterPromotionDUnArticle(@PathVariable long idArticle, @PathVariable long idPromo) {
+        promotionService.desaffecterPromotionDUnArticle(idArticle, idPromo);
+    }
 }

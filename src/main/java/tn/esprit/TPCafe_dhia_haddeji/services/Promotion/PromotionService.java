@@ -4,16 +4,20 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.TPCafe_dhia_haddeji.dto.Promotion.PromotionRequete;
 import tn.esprit.TPCafe_dhia_haddeji.dto.Promotion.PromotionResponse;
+import tn.esprit.TPCafe_dhia_haddeji.entities.Article;
 import tn.esprit.TPCafe_dhia_haddeji.entities.Promotion;
 import tn.esprit.TPCafe_dhia_haddeji.mapper.PromotionMapper;
+import tn.esprit.TPCafe_dhia_haddeji.repositories.ArticleRepository;
 import tn.esprit.TPCafe_dhia_haddeji.repositories.PromotionRepository;
 
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 @AllArgsConstructor
 
 public class PromotionService implements IPromotionService{
+    private final ArticleRepository articleRepository;
     private PromotionRepository promotionRepository;
     private PromotionMapper promotionMapper;
     @Override
@@ -69,5 +73,37 @@ public class PromotionService implements IPromotionService{
     @Override
     public boolean verifyPromotionById(long id) {
         return promotionRepository.existsById(id);
+    }
+    @Override
+    public void affecterPromotionAArticle(long idArticle, long idPromo) {
+
+        Article article = articleRepository.findById(idArticle)
+                .orElseThrow(() -> new RuntimeException("Article introuvable"));
+
+        Promotion promotion = promotionRepository.findById(idPromo)
+                .orElseThrow(() -> new RuntimeException("Promotion introuvable"));
+
+        if (article.getPromotions() == null) {
+            article.setPromotions(new ArrayList<>());
+        }
+        article.getPromotions().add(promotion);
+
+        articleRepository.save(article);
+    }
+
+    @Override
+    public void desaffecterPromotionDUnArticle(long idArticle, long idPromo) {
+
+        Article article = articleRepository.findById(idArticle)
+                .orElseThrow(() -> new RuntimeException("Article introuvable"));
+
+        Promotion promotion = promotionRepository.findById(idPromo)
+                .orElseThrow(() -> new RuntimeException("Promotion introuvable"));
+
+        if (article.getPromotions() != null) {
+            article.getPromotions().remove(promotion);
+        }
+
+        articleRepository.save(article);
     }
 }
