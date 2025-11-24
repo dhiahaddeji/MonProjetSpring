@@ -19,4 +19,22 @@ public interface IAdresseService {
     void deleteAdresseById(long id);
     long countingAdresse();
     boolean verifyAdresseById(long id);
+
+    List<AdresseReponse> findByVille(String ville);
+    List<AdresseReponse> findByCodePostal(Integer codePostal);
+    long countByVille(String ville);
+    void deleteByVille(String ville);
+    List<AdresseReponse> findByVilleAndCodePostal(String ville, Integer codePostal);
+    List<AdresseReponse> findByRueContainingIgnoreCaseAndVille(String motRue, String ville);
+    List<AdresseReponse> findByVilleIn(List<String> villes);
+    List<AdresseReponse> findByCodePostalBetween(Integer min, Integer max);
+    List<AdresseReponse> findByCodePostalGreaterThan(Integer cp);
+    List<AdresseReponse> findByCodePostalGreaterThanEqual(Integer cp);
+    List<AdresseReponse> findByCodePostalLessThan(Integer cp);
+    List<AdresseReponse> findByCodePostalLessThanEqual(Integer cp);
+    List<AdresseReponse> findByRueStartsWithAndVille(String prefix, String ville);
+    List<AdresseReponse> findByRueStartsWith(String prefix);
+    List<AdresseReponse> findByVilleEndsWith(String suffix);
+    List<AdresseReponse> findByRueIsNull();
+    List<AdresseReponse> findByVilleIsNotNull();
 }

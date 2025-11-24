@@ -11,6 +11,8 @@ import tn.esprit.TPCafe_dhia_haddeji.repositories.AdresseRepository;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class Adresseservice implements IAdresseService{
@@ -78,4 +80,138 @@ public class Adresseservice implements IAdresseService{
     public boolean verifyAdresseById(long id) {
         return adresseRepository.existsById(id);
     }
+
+
+    /// ////////////////////////////////////
+
+    @Override
+    public List<AdresseReponse> findByVille(String ville) {
+        return adresseRepository.findByVille(ville)
+                .stream()
+                .map(adresseMapper::todto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AdresseReponse> findByCodePostal(Integer codePostal) {
+        return adresseRepository.findByCodePostal(codePostal)
+                .stream()
+                .map(adresseMapper::todto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public long countByVille(String ville) {
+        return adresseRepository.countByVille(ville);
+    }
+
+    @Override
+    public void deleteByVille(String ville) {
+        adresseRepository.deleteByVille(ville);
+    }
+
+    @Override
+    public List<AdresseReponse> findByVilleAndCodePostal(String ville, Integer codePostal) {
+        return adresseRepository.findByVilleAndCodePostal(ville, codePostal)
+                .stream()
+                .map(adresseMapper::todto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AdresseReponse> findByRueContainingIgnoreCaseAndVille(String motRue, String ville) {
+        return adresseRepository.findByRueIgnoreCaseContainingAndVilleIgnoreCase(motRue, ville)
+                .stream()
+                .map(adresseMapper::todto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AdresseReponse> findByVilleIn(List<String> villes) {
+        return adresseRepository.findByVilleIn(villes)
+                .stream()
+                .map(adresseMapper::todto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AdresseReponse> findByCodePostalBetween(Integer min, Integer max) {
+        return adresseRepository.findByCodePostalBetween(min, max)
+                .stream()
+                .map(adresseMapper::todto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AdresseReponse> findByCodePostalGreaterThan(Integer cp) {
+        return adresseRepository.findByCodePostalGreaterThan(cp)
+                .stream()
+                .map(adresseMapper::todto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AdresseReponse> findByCodePostalGreaterThanEqual(Integer cp) {
+        return adresseRepository.findByCodePostalGreaterThanEqual(cp)
+                .stream()
+                .map(adresseMapper::todto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AdresseReponse> findByCodePostalLessThan(Integer cp) {
+        return adresseRepository.findByCodePostalLessThan(cp)
+                .stream()
+                .map(adresseMapper::todto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AdresseReponse> findByCodePostalLessThanEqual(Integer cp) {
+        return adresseRepository.findByCodePostalLessThanEqual(cp)
+                .stream()
+                .map(adresseMapper::todto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AdresseReponse> findByRueStartsWithAndVille(String prefix, String ville) {
+        return adresseRepository.findByRueStartsWithAndVilleOrderByCodePostal(prefix, ville)
+                .stream()
+                .map(adresseMapper::todto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AdresseReponse> findByRueStartsWith(String prefix) {
+        return adresseRepository.findByRueStartsWith(prefix)
+                .stream()
+                .map(adresseMapper::todto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AdresseReponse> findByVilleEndsWith(String suffix) {
+        return adresseRepository.findByVilleEndsWith(suffix)
+                .stream()
+                .map(adresseMapper::todto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AdresseReponse> findByRueIsNull() {
+        return adresseRepository.findByRueIsNull()
+                .stream()
+                .map(adresseMapper::todto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AdresseReponse> findByVilleIsNotNull() {
+        return adresseRepository.findByVilleIsNotNull()
+                .stream()
+                .map(adresseMapper::todto)
+                .collect(Collectors.toList());
+    }
+
 }
