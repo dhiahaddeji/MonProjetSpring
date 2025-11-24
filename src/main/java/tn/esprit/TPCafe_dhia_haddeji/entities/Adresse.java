@@ -23,5 +23,5 @@ public class Adresse {
     private Long idAdresse;
     private String rue;
     private String ville;
-    private String codePostal;
+    private int codePostal;
 }
