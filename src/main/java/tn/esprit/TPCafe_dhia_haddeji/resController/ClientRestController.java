@@ -5,6 +5,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.TPCafe_dhia_haddeji.dto.Client.ClientRequete;
 import tn.esprit.TPCafe_dhia_haddeji.dto.Client.ClientResponse;
+import tn.esprit.TPCafe_dhia_haddeji.entities.Adresse;
+import tn.esprit.TPCafe_dhia_haddeji.entities.Client;
+import tn.esprit.TPCafe_dhia_haddeji.entities.Commande;
+import tn.esprit.TPCafe_dhia_haddeji.repositories.ClientRepository;
 import tn.esprit.TPCafe_dhia_haddeji.services.Client.IClientService;
 
 
@@ -77,4 +81,20 @@ public class ClientRestController {
     public Boolean existClient(@PathVariable long id) {
         return clientService.verifyClientById(id);
     }
+    @PostMapping("/add/{nom}/{prenom}")
+    public void ajouteCommandeEtAffecterAClient(@RequestBody Commande commande,
+                                                @PathVariable String nom,
+                                                @PathVariable String prenom) {
+
+        clientService.ajouteCommandeEtAffecterAClient(commande, nom, prenom);
+    }
+    @PostMapping("/add-adresse/{idClient}")
+    public void ajouterAdresseAClient(@RequestBody Adresse adresse,
+                                      @PathVariable long idClient) {
+        clientService.ajouterEtAffecterAdresseAClient(adresse, idClient);
+    }
+
+
+
+
 }

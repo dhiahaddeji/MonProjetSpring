@@ -3,6 +3,10 @@ package tn.esprit.TPCafe_dhia_haddeji.services.Client;
 
 import tn.esprit.TPCafe_dhia_haddeji.dto.Client.ClientRequete;
 import tn.esprit.TPCafe_dhia_haddeji.dto.Client.ClientResponse;
+import tn.esprit.TPCafe_dhia_haddeji.entities.Adresse;
+import tn.esprit.TPCafe_dhia_haddeji.entities.CarteFidelite;
+import tn.esprit.TPCafe_dhia_haddeji.entities.Client;
+import tn.esprit.TPCafe_dhia_haddeji.entities.Commande;
 
 import java.util.List;
 
@@ -16,5 +20,8 @@ public interface IClientService {
     void deleteClientById(long id);
     long countingClients();
     boolean verifyClientById(long id);
+    void ajouteCommandeEtAffecterAClient(Commande c, String nomClient, String prenomClient);
+    public void ajouterEtAffecterAdresseAClient(Adresse ad, long idClient);
+    void ajouterClienteEtCarteFidelite(CarteFidelite carte);
 
 }

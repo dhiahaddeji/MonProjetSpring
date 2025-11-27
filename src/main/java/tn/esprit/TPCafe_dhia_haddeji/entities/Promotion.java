@@ -18,7 +18,7 @@ import java.util.List;
 @EqualsAndHashCode
 
 
-public class Promotion {
+public class  Promotion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long idPromotion;

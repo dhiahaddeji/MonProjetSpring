@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.TPCafe_dhia_haddeji.dto.Promotion.PromotionRequete;
 import tn.esprit.TPCafe_dhia_haddeji.dto.Promotion.PromotionResponse;
+import tn.esprit.TPCafe_dhia_haddeji.entities.Promotion;
 import tn.esprit.TPCafe_dhia_haddeji.services.Promotion.IPromotionService;
 
 
@@ -26,7 +27,7 @@ public class PromotionRestController {
     }
 
     @Operation(summary = "Ajouter une nouvelle promotion", description = "Crée une nouvelle promotion dans le système")
-    @PostMapping
+    @PostMapping("/addpromo")
     public PromotionResponse addPromotion(@RequestBody PromotionRequete promotion) {
         return promotionService.addPromotion(promotion);
     }
@@ -79,14 +80,28 @@ public class PromotionRestController {
         return promotionService.verifyPromotionById(id);
     }
 
-    @PutMapping("/{idPromo}/article/{idArticle}")
+    @PostMapping("/{idPromo}/article/{idArticle}")
     public void affecterPromotionAArticle(@PathVariable long idArticle, @PathVariable long idPromo) {
         promotionService.affecterPromotionAArticle(idArticle, idPromo);
     }
 
 
-    @PutMapping("/{idPromo}/remove-article/{idArticle}")
+    @PostMapping ("/{idPromo}/remove-article/{idArticle}")
     public void desaffecterPromotionDUnArticle(@PathVariable long idArticle, @PathVariable long idPromo) {
         promotionService.desaffecterPromotionDUnArticle(idArticle, idPromo);
     }
+    @PostMapping("/addpromo/{idArticle}")
+    public void ajouterPromoEtAffecterAArticle(@RequestBody PromotionRequete promotionRequete,
+                                               @PathVariable long idArticle) {
+
+        // Convertir DTO → Entité
+        Promotion promotion = Promotion.builder()
+                .pourcentagePromo(promotionRequete.getPourcentagePromo())
+                .dateDebutPromo(promotionRequete.getDateDebutPromo())
+                .dateFinPromo(promotionRequete.getDateFinPromo())
+                .build();
+
+        promotionService.ajouterPromoEtAffecterAArticle(promotion, idArticle);
+    }
+
 }

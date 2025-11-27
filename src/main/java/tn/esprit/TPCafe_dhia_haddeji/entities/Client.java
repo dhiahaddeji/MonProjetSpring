@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,10 +25,11 @@ public class Client {
     String nom;
     String prenom;
     LocalDate dateNaissance;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "adresse_id_adresse")
     Adresse adresse;
-    @OneToOne(mappedBy = "client")
+    @OneToOne(mappedBy = "client" , cascade = CascadeType.ALL)
     CarteFidelite carteFidelite;
-    @OneToMany(mappedBy = "client")
-    List<Commande> commandes;
+    @OneToMany(mappedBy = "client",cascade = CascadeType.ALL)
+    List<Commande> commandes=new ArrayList<>();
 }

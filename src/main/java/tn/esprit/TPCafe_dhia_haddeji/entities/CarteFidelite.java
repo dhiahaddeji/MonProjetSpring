@@ -23,6 +23,7 @@ public class CarteFidelite {
     int pointsAccumules;
     LocalDate dateCreation;
     @OneToOne
+    @JoinColumn(name = "client_id_client") // FK vers client
     Client client;
 
 }

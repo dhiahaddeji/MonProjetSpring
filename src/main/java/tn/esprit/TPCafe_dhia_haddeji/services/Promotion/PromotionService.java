@@ -16,33 +16,34 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 
-public class PromotionService implements IPromotionService{
+public class PromotionService implements IPromotionService {
     private final ArticleRepository articleRepository;
     private PromotionRepository promotionRepository;
     private PromotionMapper promotionMapper;
+
     @Override
     public PromotionResponse addPromotion(PromotionRequete promotion) {
         Promotion P = promotionMapper.toentity(promotion);
-        Promotion p= promotionRepository.save(P);
+        Promotion p = promotionRepository.save(P);
         return promotionMapper.toDto(p);
     }
 
     @Override
     public List<PromotionResponse> savePromotion(List<PromotionRequete> promotions) {
         List<Promotion> list = promotionMapper.toentity1(promotions);
-        List<Promotion> l= promotionRepository.saveAll(list);
+        List<Promotion> l = promotionRepository.saveAll(list);
         return promotionMapper.toDto1(l);
     }
 
     @Override
     public PromotionResponse selectPromotionById(long id) {
-        Promotion p= promotionRepository.findById(id).get();
+        Promotion p = promotionRepository.findById(id).get();
         return promotionMapper.toDto(p);
     }
 
     @Override
     public List<PromotionResponse> selectAllPromotion() {
-        List<Promotion> list =promotionRepository.findAll();
+        List<Promotion> list = promotionRepository.findAll();
         return promotionMapper.toDto1(list);
     }
 
@@ -60,7 +61,7 @@ public class PromotionService implements IPromotionService{
 
     @Override
     public void deletePromotion(PromotionRequete promotion) {
-        Promotion p= promotionMapper.toentity(promotion);
+        Promotion p = promotionMapper.toentity(promotion);
         promotionRepository.delete(p);
 
     }
@@ -74,6 +75,7 @@ public class PromotionService implements IPromotionService{
     public boolean verifyPromotionById(long id) {
         return promotionRepository.existsById(id);
     }
+
     @Override
     public void affecterPromotionAArticle(long idArticle, long idPromo) {
 
@@ -106,4 +108,20 @@ public class PromotionService implements IPromotionService{
 
         articleRepository.save(article);
     }
+
+    @Override
+    public void ajouterPromoEtAffecterAArticle(Promotion p, long idArticle) {
+
+        Article article = articleRepository.findById(idArticle).get();
+
+        // Ajouter la promo à l’article //travaille avec cascade
+        article.getPromotions().add(p);
+
+        // Grâce au cascade, ça sauvegarde promotion + la relation
+        articleRepository.save(article);
+    }
+
 }
+
+
+

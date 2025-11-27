@@ -32,7 +32,7 @@ public class ArticleRestController {
     }
 
     @Operation(summary = "Ajouter un nouvel article", description = "Crée un nouvel article dans le système")
-    @PostMapping
+    @PostMapping("addarticle")
     public ArticleResponse addArticle(@RequestBody ArticleRequete article) {
         return articleService.addArticle(article);
     }

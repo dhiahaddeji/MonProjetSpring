@@ -5,11 +5,16 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.TPCafe_dhia_haddeji.dto.Client.ClientRequete;
 import tn.esprit.TPCafe_dhia_haddeji.dto.Client.ClientResponse;
+import tn.esprit.TPCafe_dhia_haddeji.entities.Adresse;
+import tn.esprit.TPCafe_dhia_haddeji.entities.CarteFidelite;
 import tn.esprit.TPCafe_dhia_haddeji.entities.Client;
+import tn.esprit.TPCafe_dhia_haddeji.entities.Commande;
 import tn.esprit.TPCafe_dhia_haddeji.mapper.ClientMapper;
 import tn.esprit.TPCafe_dhia_haddeji.repositories.ClientRepository;
+import tn.esprit.TPCafe_dhia_haddeji.repositories.CommandeRepository;
 
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 @AllArgsConstructor
@@ -17,6 +22,7 @@ import java.util.List;
 public class ClientService implements IClientService {
     private ClientRepository clientRepository;
     private ClientMapper clientMapper;
+
     @Override
     public ClientResponse addClient(ClientRequete client) {
         Client clt= clientMapper.toentity(client);
@@ -71,5 +77,47 @@ public class ClientService implements IClientService {
     @Override
     public boolean verifyClientById(long id) {
         return clientRepository.existsById(id);
+    }
+    @Override
+    public void ajouteCommandeEtAffecterAClient(Commande c, String nomClient, String prenomClient) {
+
+        Client client = clientRepository.findByNomAndPrenom(nomClient, prenomClient);
+        //parent -->commande ? Child -> Client ?
+
+        // si le client n'existe pas → arrêter la méthode
+        if (client == null) return;
+
+        // initialiser la liste si elle est null
+        if (client.getCommandes() == null)
+            client.setCommandes(new ArrayList<>());
+
+        // affectation
+        c.setClient(client);
+        client.getCommandes().add(c);
+
+        // save car cascade
+        clientRepository.save(client);
+    }
+
+    @Override
+    public void ajouterEtAffecterAdresseAClient(Adresse ad, long idClient) {
+        Client client = clientRepository.findById(idClient).orElse(null);
+        if (client == null) return;
+
+        client.setAdresse(ad);
+        clientRepository.save(client);
+    }
+    @Override
+    public void ajouterClienteEtCarteFidelite(CarteFidelite carte) {
+
+        Client client = carte.getClient();
+
+
+        client.setCarteFidelite(carte);
+
+        carte.setClient(client);
+
+
+        clientRepository.save(client);
     }
 }

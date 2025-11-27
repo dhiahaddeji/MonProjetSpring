@@ -8,6 +8,7 @@ import tn.esprit.TPCafe_dhia_haddeji.dto.CarteFidelite.CarteFideliteRequete;
 import tn.esprit.TPCafe_dhia_haddeji.dto.CarteFidelite.CarteFideliteResponse;
 import tn.esprit.TPCafe_dhia_haddeji.entities.CarteFidelite;
 import tn.esprit.TPCafe_dhia_haddeji.services.CartFidelite.ICarteFideliteService;
+import tn.esprit.TPCafe_dhia_haddeji.services.Client.IClientService;
 
 
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.List;
 public class CarteFideliteRestController {
 
     private ICarteFideliteService carteFideliteService;
+    private final IClientService clientService;
 
     @Operation(summary = "Récupérer toutes les cartes fidélité", description = "Retourne la liste complète de toutes les cartes fidélité")
     @GetMapping
@@ -78,5 +80,10 @@ public class CarteFideliteRestController {
     @GetMapping("exist/{id}")
     public Boolean exist(@PathVariable Long id) {
         return carteFideliteService.verifyCarteFideliteById(id);
+    }
+
+    @PostMapping("/add-with-client")
+    public void ajouterCarteEtClient(@RequestBody CarteFidelite carte) {
+        clientService.ajouterClienteEtCarteFidelite(carte);
     }
 }
